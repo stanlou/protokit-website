@@ -15,7 +15,7 @@ export const Footer = () => {
       <div className="container grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="flex flex-col gap-4 text-accent-foreground">
           <NextImage
-            src="/logo-symbol-white.svg"
+            src="./logo-symbol-white.svg"
             width={40}
             height={40}
             alt="Logo symbol"
