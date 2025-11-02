@@ -100,7 +100,7 @@ export const HeroGraphic = () => {
           style={{ position: "relative", height: "600px" }}
         >
           <NextImage
-            src="/balances.png"
+            src="./balances.png"
             alt="hero"
             layout="fill"
             objectFit="contain"

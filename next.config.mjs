@@ -7,7 +7,6 @@ const withNextra = nextra({
   search: { codeblocks: false },
 });
 
-const isProd = process.env.NODE_ENV === "production";
 
 export default withNextra({
   reactStrictMode: true,

@@ -11,7 +11,7 @@ export const MerkleTree = () => {
           <p className="leading-8">Protokit goes hand in hand with Mina Protocol's Succinct Design philosophy, using best-of-breed cryptography.</p>
         </div>
         <div className="flex items-center justify-center">
-          <NextImage src="/merkle.png" width={300} height={300} alt="Merkle Tree" className="p-8 lg:p-0" />
+          <NextImage src="./merkle.png" width={300} height={300} alt="Merkle Tree" className="p-8 lg:p-0" />
         </div>
       </Card>
     </section>
