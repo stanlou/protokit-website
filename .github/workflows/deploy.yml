@@ -1,0 +1,60 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+      - '**'
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build and export Nextra site
+        run: |
+          pnpm build
+          pnpm exec next export
+
+      - name: Prepare deployment folder
+        run: |
+          mkdir -p deploy_dir
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            cp -r out/* deploy_dir/
+          else
+            mkdir -p deploy_dir/preview/${{ github.ref_name }}
+            cp -r out/* deploy_dir/preview/${{ github.ref_name }}/
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy_dir
+          keep_files: true
+
+      - name: Comment preview URL
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            Preview available at:
+            https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/preview/${{ github.head_ref }}/
