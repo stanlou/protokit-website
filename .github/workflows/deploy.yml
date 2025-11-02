@@ -1,8 +1,10 @@
+name: Deploy Website
+
 on:
   push:
     branches:
-      - main  
-  workflow_dispatch:  
+      - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -16,33 +18,31 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
-      - name: Install pnpm
-        run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build and export Nextra site
-        env: 
-          NODE_ENV: production
-          NEXT_PUBLIC_IS_PROD: true
         run: |
           pnpm build
           pnpm exec next export
           touch out/.nojekyll
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/deploy-pages@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          user_name: "GitHub Actions"
-          user_email: "actions@github.com"
+          branch: gh-pages
+          folder: out
+          
+      - name: Print GitHub Pages URL
+        run: |
+          echo "✅ Site deployed!"
+          echo "Your site should be live at: https://${{ github.repository_owner }}.github.io/${{ github.repository }}"
