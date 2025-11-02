@@ -14,6 +14,6 @@ export default withNextra({
   output: "export",
   images: { unoptimized: true },
   trailingSlash: true,
-  basePath: "",
-  assetPrefix: "",
+  basePath: isProd ? "/protokit-website" : "",
+  assetPrefix: isProd ? "/protokit-website/" : "",
 });
