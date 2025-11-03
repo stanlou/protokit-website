@@ -1,10 +1,24 @@
-import NextImage from 'next/image'
+import Image from "next/image";
 
 export const Logo = () => {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
   return (
     <div>
-      <NextImage src="./logo-dark.svg" width={120} height={40} alt="Logo Dark" className="hidden dark:flex" />
-      <NextImage src="./logo-light.svg" width={120} height={40} alt="Logo Light" className="flex dark:hidden" />
+      <Image
+        src={`${basePath}/logo-dark.svg`}
+        width={120}
+        height={40}
+        alt="Logo Dark"
+        className="hidden dark:flex"
+      />
+      <Image
+        src={`${basePath}/logo-light.svg`}
+        width={120}
+        height={40}
+        alt="Logo Light"
+        className="flex dark:hidden"
+      />
     </div>
-  )
-}
+  );
+};
