@@ -2,12 +2,24 @@ import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { Logo } from "./src/components/logo";
 import { Footer } from "./src/components/footer";
+import Head from "next/head";
+
+const isProd = process.env.NODE_ENV === "production";
+const basePath = isProd ? "/protokit-website" : "";
 
 const config: DocsThemeConfig = {
   logo: <Logo />,
   search: {
     placeholder: "Search docs...",
   },
+    head: (
+    <>
+      <Head>
+        <link rel="icon" href={`${basePath}/favicon.ico`} />
+      </Head>
+    </>
+  ),
+
   project: {
     link: "https://github.com/proto-kit",
   },
