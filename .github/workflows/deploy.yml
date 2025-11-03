@@ -39,7 +39,3 @@ jobs:
           user_name: "GitHub Actions"
           user_email: "actions@github.com"
                     
-      - name: Print GitHub Pages URL
-        run: |
-          echo "✅ Site deployed!"
-          echo "Your site should be live at: https://${{ github.repository_owner }}.github.io/${{ github.repository }}"

@@ -2,22 +2,12 @@ import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { Logo } from "./src/components/logo";
 import { Footer } from "./src/components/footer";
-import Head from "next/head";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const config: DocsThemeConfig = {
   logo: <Logo />,
   search: {
     placeholder: "Search docs...",
   },
-  head: (
-    <>
-      <Head>
-        <link rel="icon" href={`${basePath}/favicon.ico`} />
-      </Head>
-    </>
-  ),
   project: {
     link: "https://github.com/proto-kit",
   },
@@ -44,6 +34,7 @@ const config: DocsThemeConfig = {
     toggleButton: true,
     titleComponent({ title }) {},
   },
+  head: null,
   // useNextSeoProps() {
   //   return {
   //     titleTemplate: "%s – Protokit",
