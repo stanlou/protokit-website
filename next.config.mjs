@@ -7,12 +7,13 @@ const withNextra = nextra({
   search: { codeblocks: false },
 });
 
+const isProd = process.env.NODE_ENV === "production";
 
 export default withNextra({
   reactStrictMode: true,
   output: "export",
   images: { unoptimized: true },
   trailingSlash: true,
-  basePath: "/protokit-website", 
-  assetPrefix: "/protokit-website/" ,
+  basePath: isProd ? "/protokit-website" : "",
+  assetPrefix: isProd ? "/protokit-website/" : "",
 });
