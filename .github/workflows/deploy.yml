@@ -29,7 +29,6 @@ jobs:
         run: |
           pnpm build
           pnpm exec next export
-          touch out/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
