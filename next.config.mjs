@@ -8,12 +8,13 @@ const withNextra = nextra({
 });
 
 const isProd = process.env.NODE_ENV === "production";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default withNextra({
   reactStrictMode: true,
   output: "export",
   images: { unoptimized: true },
   trailingSlash: true,
-  basePath: isProd ? "/protokit-website" : "",
-  assetPrefix: isProd ? "/protokit-website/" : "",
+  basePath: isProd ? basePath : "",
+  assetPrefix: isProd ? `${basePath}/` : "",
 });
